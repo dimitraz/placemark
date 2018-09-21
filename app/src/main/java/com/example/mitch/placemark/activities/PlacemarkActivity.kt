@@ -12,7 +12,7 @@ import org.jetbrains.anko.toast
 
 class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
   val placemarks = ArrayList<PlacemarkModel>()
-  var app : MainApp? = null
+  lateinit var app : MainApp
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -25,10 +25,10 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
       placemark.description = description.text.toString()
 
       if (placemark.title.isNotEmpty()) {
-        app!!.placemarks.add(placemark.copy())
+        app.placemarks.add(placemark.copy())
 
         info("Placemark added with title: ${placemark.title}, description: ${placemark.description}")
-        app!!.placemarks.forEach { info("Placemark added: ${it}") }
+        app.placemarks.forEach { info("Placemark added: ${it}") }
       }
       else {
         toast ("Please enter a valid title")
