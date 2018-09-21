@@ -3,13 +3,11 @@ package com.example.mitch.placemark.activities
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.*
 import com.example.mitch.placemark.R
+import com.example.mitch.placemark.adapters.PlacemarkAdapter
 import com.example.mitch.placemark.main.MainApp
-import com.example.mitch.placemark.models.PlacemarkModel
 import kotlinx.android.synthetic.main.activity_placemark_list.*
-import kotlinx.android.synthetic.main.card_placemark.view.*
 import org.jetbrains.anko.startActivityForResult
 
 class PlacemarkListActivity : AppCompatActivity() {
@@ -37,25 +35,5 @@ class PlacemarkListActivity : AppCompatActivity() {
       R.id.item_add -> startActivityForResult<PlacemarkActivity>(0)
     }
     return super.onOptionsItemSelected(item)
-  }
-}
-
-class PlacemarkAdapter constructor(private var placemarks: List<PlacemarkModel>) : RecyclerView.Adapter<PlacemarkAdapter.MainHolder>() {
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
-    return MainHolder(LayoutInflater.from(parent?.context).inflate(R.layout.card_placemark, parent, false))
-  }
-
-  override fun onBindViewHolder(holder: MainHolder, position: Int) {
-    val placemark = placemarks[holder.adapterPosition]
-    holder.bind(placemark)
-  }
-
-  override fun getItemCount(): Int = placemarks.size
-
-  class MainHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    fun bind(placemark: PlacemarkModel) {
-      itemView.placemarkTitle.text = placemark.title
-      itemView.description.text = placemark.description
-    }
   }
 }
