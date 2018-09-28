@@ -15,6 +15,7 @@ import org.jetbrains.anko.startActivityForResult
 import org.jetbrains.anko.toast
 
 class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
+  val placemark = PlacemarkModel()
   val placemarks = ArrayList<PlacemarkModel>()
   lateinit var app : MainApp
 
@@ -26,14 +27,12 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     app = application as MainApp
 
     btnAdd.setOnClickListener() {
-      val placemark = PlacemarkModel()
       placemark.title = placemarkTitle.text.toString()
       placemark.description = description.text.toString()
 
       if (placemark.title.isNotEmpty()) {
-        app.placemarks.add(placemark.copy())
-        info("Placemark added with title: ${placemark.title}, description: ${placemark.description}")
-        app.placemarks.forEach { info("Placemark added: ${it}") }
+        app.placemarks.create(placemark.copy())
+        app.placemarks.logAll()
 
         setResult(AppCompatActivity.RESULT_OK)
         finish()
