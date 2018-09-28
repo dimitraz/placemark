@@ -6,11 +6,18 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 import com.example.mitch.placemark.R
 import com.example.mitch.placemark.adapters.PlacemarkAdapter
+import com.example.mitch.placemark.adapters.PlacemarkListener
 import com.example.mitch.placemark.main.MainApp
+import com.example.mitch.placemark.models.PlacemarkModel
 import kotlinx.android.synthetic.main.activity_placemark_list.*
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 
-class PlacemarkListActivity : AppCompatActivity() {
+class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
+  override fun onPlacemarkClick(placemark: PlacemarkModel) {
+    startActivityForResult(intentFor<PlacemarkActivity>(), 0)
+  }
+
   lateinit var app: MainApp
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +29,7 @@ class PlacemarkListActivity : AppCompatActivity() {
 
     val layoutManager = LinearLayoutManager(this)
     recyclerView.layoutManager = layoutManager
-    recyclerView.adapter = PlacemarkAdapter(app.placemarks.findAll())
+    recyclerView.adapter = PlacemarkAdapter(app.placemarks.findAll(), this)
   }
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
