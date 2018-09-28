@@ -1,8 +1,13 @@
 package com.example.mitch.placemark.models
 
-import org.jetbrains.anko.info
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+
+var lastId = 0L
+
+internal fun getId(): Long {
+  return lastId++
+}
 
 class PlacemarkMemStore : PlacemarkStore, AnkoLogger {
   val placemarks = ArrayList<PlacemarkModel>()
@@ -12,12 +17,22 @@ class PlacemarkMemStore : PlacemarkStore, AnkoLogger {
   }
 
   override fun create(placemark: PlacemarkModel) {
+    placemark.id = getId()
     placemarks.add(placemark)
+  }
+
+  override fun update(placemark: PlacemarkModel) {
+    var foundPlacemark: PlacemarkModel? = placemarks.find { p -> p.id == placemark.id }
+
+    if (foundPlacemark != null) {
+      foundPlacemark.title = placemark.title
+      foundPlacemark.description = placemark.description
+    }
   }
 
   fun logAll() {
     placemarks.forEach {
-      info("Placemark added with title: ${it.title}, description: ${it.description}")
+      info("${it}")
     }
   }
 }
