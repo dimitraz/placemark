@@ -1,10 +1,14 @@
 package com.example.mitch.placemark.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.example.mitch.placemark.R
+import com.example.mitch.placemark.helpers.readImage
+import com.example.mitch.placemark.helpers.readImageFromPath
+import com.example.mitch.placemark.helpers.showImagePicker
 import com.example.mitch.placemark.main.MainApp
 import com.example.mitch.placemark.models.PlacemarkModel
 import kotlinx.android.synthetic.main.activity_placemark.*
@@ -14,8 +18,9 @@ import org.jetbrains.anko.toast
 
 class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
   var placemark = PlacemarkModel()
-  val placemarks = ArrayList<PlacemarkModel>()
   var edit = false
+  val IMAGE_REQUEST = 1
+  var image: String = ""
   lateinit var app: MainApp
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +37,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
       placemark = intent.extras.getParcelable<PlacemarkModel>("placemark_edit")
       placemarkTitle.setText(placemark.title)
       description.setText(placemark.description)
+      placemarkImage.setImageBitmap(readImageFromPath(this, placemark.image))
     }
 
     btnAdd.setOnClickListener() {
@@ -50,6 +56,22 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         finish()
       } else {
         toast(getString(R.string.add_error_message))
+      }
+    }
+
+    chooseImage.setOnClickListener {
+      showImagePicker(this, IMAGE_REQUEST)
+    }
+  }
+
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+    when (requestCode) {
+      IMAGE_REQUEST -> {
+        if (data != null) {
+          placemark.image = data.getData().toString()
+          placemarkImage.setImageBitmap(readImage(this, resultCode, data))
+        }
       }
     }
   }
