@@ -15,6 +15,7 @@ import org.jetbrains.anko.toast
 class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
   var placemark = PlacemarkModel()
   val placemarks = ArrayList<PlacemarkModel>()
+  var edit = false
   lateinit var app: MainApp
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +26,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     app = application as MainApp
 
     if (intent.hasExtra("placemark_edit")) {
+      edit = true
       btnAdd.setText(getString(R.string.button_editPlacemark))
 
       placemark = intent.extras.getParcelable<PlacemarkModel>("placemark_edit")
@@ -37,14 +39,13 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
       placemark.description = description.text.toString()
 
       if (placemark.title.isNotEmpty()) {
-        if (intent.hasExtra("placemark_edit")) {
+        if (edit) {
           app.placemarks.update(placemark.copy())
           app.placemarks.logAll()
         } else {
           app.placemarks.create(placemark.copy())
           app.placemarks.logAll()
         }
-
         setResult(AppCompatActivity.RESULT_OK)
         finish()
       } else {
