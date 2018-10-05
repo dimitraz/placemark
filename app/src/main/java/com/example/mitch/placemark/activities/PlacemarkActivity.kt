@@ -30,9 +30,11 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     setSupportActionBar(toolbarAdd)
     app = application as MainApp
 
+    // Update view for editing a placemark
     if (intent.hasExtra("placemark_edit")) {
       edit = true
       btnAdd.setText(getString(R.string.button_editPlacemark))
+      chooseImage.setText(getString(R.string.button_editImage))
 
       placemark = intent.extras.getParcelable<PlacemarkModel>("placemark_edit")
       placemarkTitle.setText(placemark.title)
@@ -40,6 +42,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
       placemarkImage.setImageBitmap(readImageFromPath(this, placemark.image))
     }
 
+    // Add placemark button listener
     btnAdd.setOnClickListener() {
       placemark.title = placemarkTitle.text.toString()
       placemark.description = description.text.toString()
@@ -71,6 +74,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         if (data != null) {
           placemark.image = data.getData().toString()
           placemarkImage.setImageBitmap(readImage(this, resultCode, data))
+          chooseImage.setText(getString(R.string.button_editImage))
         }
       }
     }

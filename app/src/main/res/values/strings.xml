@@ -4,6 +4,7 @@
   <string name="hint_description">Description</string>
   <string name="button_addPlacemark">Add Placemark</string>
   <string name="button_editPlacemark">Save Placemark</string>
+  <string name="button_editImage">Change Image</string>
   <string name="menu_addPlacemark">Add</string>
   <string name="menu_cancelPlacemark">Cancel</string>
   <string name="add_error_message">Please enter a valid title</string>
