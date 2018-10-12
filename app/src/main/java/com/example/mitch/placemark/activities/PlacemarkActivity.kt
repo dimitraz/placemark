@@ -13,6 +13,8 @@ import com.example.mitch.placemark.main.MainApp
 import com.example.mitch.placemark.models.PlacemarkModel
 import kotlinx.android.synthetic.main.activity_placemark.*
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 
 
@@ -45,7 +47,12 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
       placemarkImage.setImageBitmap(readImageFromPath(this, placemark.image))
     }
 
-    // Add placemark button listener
+    // Add location button listener
+    placemarkLocation.setOnClickListener {
+      startActivity (intentFor<MapsActivity>())
+    }
+
+    // Add create placemark button listener
     btnAdd.setOnClickListener() {
       placemark.title = placemarkTitle.text.toString()
       placemark.description = description.text.toString()
@@ -65,6 +72,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
       }
     }
 
+    // Add choose image button listener
     chooseImage.setOnClickListener {
       showImagePicker(this, IMAGE_REQUEST)
     }
