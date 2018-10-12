@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.mitch.placemark.R
+import com.example.mitch.placemark.helpers.readImageFromPath
 import com.example.mitch.placemark.models.PlacemarkModel
-import kotlinx.android.synthetic.main.card_placemark.view.*
+import kotlinx.android.synthetic.main.card_placemark.view.placemarkTitle
+import kotlinx.android.synthetic.main.card_placemark.view.description
+import kotlinx.android.synthetic.main.card_placemark.view.imageIcon
 
 class PlacemarkAdapter constructor(private var placemarks: List<PlacemarkModel>,
                                    private val listener: PlacemarkListener) : RecyclerView.Adapter<PlacemarkAdapter.MainHolder>() {
@@ -25,6 +28,7 @@ class PlacemarkAdapter constructor(private var placemarks: List<PlacemarkModel>,
     fun bind(placemark: PlacemarkModel, listener: PlacemarkListener) {
       itemView.placemarkTitle.text = placemark.title
       itemView.description.text = placemark.description
+      itemView.imageIcon.setImageBitmap(readImageFromPath(itemView.context, placemark.image))
       itemView.setOnClickListener { listener.onPlacemarkClick(placemark) }
     }
   }

@@ -34,7 +34,10 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     if (intent.hasExtra("placemark_edit")) {
       edit = true
       btnAdd.setText(getString(R.string.button_editPlacemark))
-      chooseImage.setText(getString(R.string.button_editImage))
+
+      if (placemark.image != null) {
+        chooseImage.setText(getString(R.string.button_editImage))
+      }
 
       placemark = intent.extras.getParcelable<PlacemarkModel>("placemark_edit")
       placemarkTitle.setText(placemark.title)
