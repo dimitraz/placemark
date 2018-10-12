@@ -21,9 +21,11 @@ import org.jetbrains.anko.toast
 
 class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
   var placemark = PlacemarkModel()
-  var edit = false
   val IMAGE_REQUEST = 1
+  val LOCATION_REQUEST = 2
+  var edit = false
   var image: String = ""
+  var location = Location(52.245696, -7.139102, 15f)
   lateinit var app: MainApp
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,8 +57,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
     // Add location button listener
     placemarkLocation.setOnClickListener {
-      val location = Location(52.245696, -7.139102, 15f)
-      startActivity (intentFor<MapsActivity>().putExtra("location", location))
+      startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
     }
 
     // Add create placemark button listener
@@ -88,6 +89,12 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
           placemark.image = data.getData().toString()
           placemarkImage.setImageBitmap(readImage(this, resultCode, data))
           chooseImage.setText(getString(R.string.button_editImage))
+        }
+      }
+      LOCATION_REQUEST -> {
+        if (data != null) {
+          location = data.extras.getParcelable<Location>("location")
+          info("Location: $location")
         }
       }
     }
