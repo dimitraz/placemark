@@ -10,6 +10,7 @@ import com.example.mitch.placemark.helpers.readImage
 import com.example.mitch.placemark.helpers.readImageFromPath
 import com.example.mitch.placemark.helpers.showImagePicker
 import com.example.mitch.placemark.main.MainApp
+import com.example.mitch.placemark.models.Location
 import com.example.mitch.placemark.models.PlacemarkModel
 import kotlinx.android.synthetic.main.activity_placemark.*
 import org.jetbrains.anko.AnkoLogger
@@ -47,9 +48,15 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
       placemarkImage.setImageBitmap(readImageFromPath(this, placemark.image))
     }
 
+    // Add choose image button listener
+    chooseImage.setOnClickListener {
+      showImagePicker(this, IMAGE_REQUEST)
+    }
+
     // Add location button listener
     placemarkLocation.setOnClickListener {
-      startActivity (intentFor<MapsActivity>())
+      val location = Location(52.245696, -7.139102, 15f)
+      startActivity (intentFor<MapsActivity>().putExtra("location", location))
     }
 
     // Add create placemark button listener
@@ -70,11 +77,6 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
       } else {
         toast(getString(R.string.add_error_message))
       }
-    }
-
-    // Add choose image button listener
-    chooseImage.setOnClickListener {
-      showImagePicker(this, IMAGE_REQUEST)
     }
   }
 
