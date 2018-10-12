@@ -36,9 +36,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
   override fun onMapReady(googleMap: GoogleMap) {
     mMap = googleMap
 
-    // Add a marker in Sydney and move the camera
-    val sydney = LatLng(-34.0, 151.0)
-    mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-    mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+    // Add a marker in Waterford and move the camera
+    val wit = LatLng(52.245696, -7.139102)
+    mMap.addMarker(MarkerOptions().position(wit).title("Marker in Waterford"))
+    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(wit, 16f))
   }
 }
