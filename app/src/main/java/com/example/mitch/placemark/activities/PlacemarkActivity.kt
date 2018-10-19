@@ -25,7 +25,6 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
   val LOCATION_REQUEST = 2
   var edit = false
   var image: String = ""
-  var location = Location(52.245696, -7.139102, 15f)
   lateinit var app: MainApp
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,6 +56,12 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
     // Add location button listener
     placemarkLocation.setOnClickListener {
+      val location = Location(52.245696, -7.139102, 15f)
+      if (placemark.location.zoom != 0f) {
+        location.lat =  placemark.location.lat
+        location.lng = placemark.location.lng
+        location.zoom = placemark.location.zoom
+      }
       startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
     }
 
@@ -93,8 +98,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
       }
       LOCATION_REQUEST -> {
         if (data != null) {
-          location = data.extras.getParcelable<Location>("location")
-          info("Location: $location")
+          placemark.location = data.extras.getParcelable<Location>("location")
         }
       }
     }
