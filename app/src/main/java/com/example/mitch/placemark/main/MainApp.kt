@@ -6,10 +6,11 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
 class MainApp : Application(), AnkoLogger {
-  val placemarks = PlacemarkMemStore()
+  lateinit var placemarks: PlacemarkMemStore
 
   override fun onCreate() {
     super.onCreate()
+    placemarks = PlacemarkMemStore()
     info("Placemark started")
   }
 }
