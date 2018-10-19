@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.example.mitch.placemark.R
+import com.example.mitch.placemark.R.layout.activity_placemark
 import com.example.mitch.placemark.helpers.readImage
 import com.example.mitch.placemark.helpers.readImageFromPath
 import com.example.mitch.placemark.helpers.showImagePicker
@@ -17,7 +18,6 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
-
 
 class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
   var placemark = PlacemarkModel()

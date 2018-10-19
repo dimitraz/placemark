@@ -1,5 +1,7 @@
 package com.example.mitch.placemark.activities
 
+import android.app.Activity
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.mitch.placemark.R
@@ -10,10 +12,11 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
-  private lateinit var mMap: GoogleMap
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback,  GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
+  private lateinit var map: GoogleMap
   var location = Location()
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,17 +31,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     mapFragment.getMapAsync(this)
   }
 
-  /**
-   * Manipulates the map once available.
-   * This callback is triggered when the map is ready to be used.
-   * This is where we can add markers or lines, add listeners or move the camera. In this case,
-   * we just add a marker near Sydney, Australia.
-   * If Google Play services is not installed on the device, the user will be prompted to install
-   * it inside the SupportMapFragment. This method will only be triggered once the user has
-   * installed Google Play services and returned to the app.
-   */
   override fun onMapReady(googleMap: GoogleMap) {
-    mMap = googleMap
+    map = googleMap
 
     // Add a marker and move the camera
     val loc = LatLng(location.lat, location.lng)
@@ -47,7 +41,35 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         .snippet("GPS: " + loc.toString())
         .draggable(true)
         .position(loc)
-    mMap.addMarker(options)
-    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
+    map.addMarker(options)
+    map.setOnMarkerDragListener(this)
+    map.setOnMarkerClickListener(this)
+    map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
+  }
+
+  override fun onMarkerDragEnd(marker: Marker) {
+    location.lat = marker.position.latitude
+    location.lng = marker.position.longitude
+    location.zoom = map.cameraPosition.zoom
+  }
+
+  override fun onMarkerDragStart(marker: Marker) {
+  }
+
+  override fun onMarkerDrag(marker: Marker) {
+  }
+
+  override fun onMarkerClick(marker: Marker): Boolean {
+    var loc = LatLng(location.lat, location.lng)
+    marker.snippet = "GPS: " + loc.toString()
+    return false
+  }
+
+  override fun onBackPressed() {
+    val resultIntent = Intent()
+    resultIntent.putExtra("location", location)
+    setResult(Activity.RESULT_OK, resultIntent)
+    finish()
+    super.onBackPressed()
   }
 }
