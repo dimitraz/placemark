@@ -46,6 +46,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
       placemark = intent.extras.getParcelable<PlacemarkModel>("placemark_edit")
       placemarkTitle.setText(placemark.title)
       description.setText(placemark.description)
+      info("placemark image ${placemark.image}")
       placemarkImage.setImageBitmap(readImageFromPath(this, placemark.image))
     }
 
@@ -112,6 +113,10 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     when (item?.itemId) {
       R.id.item_cancel -> finish()
+      R.id.item_delete -> {
+        app.placemarks.delete(placemark)
+        finish()
+      }
     }
     return super.onOptionsItemSelected(item)
   }
