@@ -33,18 +33,6 @@ class PlacemarkView : AppCompatActivity(), AnkoLogger {
     placemarkLocation.setOnClickListener {
       presenter.doSetLocation()
     }
-
-    // Add create placemark button listener
-    btnAdd.setOnClickListener() {
-      placemark.title = placemarkTitle.text.toString()
-      placemark.description = description.text.toString()
-
-      if (placemark.title.isNotEmpty()) {
-        presenter.doAddOrSave(placemark.title, placemark.description)
-      } else {
-        toast(getString(R.string.add_error_message))
-      }
-    }
   }
 
   fun showPlacemark(placemark: PlacemarkModel) {
@@ -54,13 +42,12 @@ class PlacemarkView : AppCompatActivity(), AnkoLogger {
     if (placemark.image != null) {
       chooseImage.setText(R.string.button_editImage)
     }
-    btnAdd.setText(R.string.button_editPlacemark)
   }
 
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     super.onActivityResult(requestCode, resultCode, data)
     if (data != null) {
-     presenter.doActivityResult(requestCode, resultCode, data)
+      presenter.doActivityResult(requestCode, resultCode, data)
     }
   }
 
@@ -73,6 +60,16 @@ class PlacemarkView : AppCompatActivity(), AnkoLogger {
     when (item?.itemId) {
       R.id.item_cancel -> presenter.doCancel()
       R.id.item_delete -> presenter.doDelete()
+      R.id.item_save -> {
+        placemark.title = placemarkTitle.text.toString()
+        placemark.description = description.text.toString()
+
+        if (placemark.title.isNotEmpty()) {
+          presenter.doAddOrSave(placemark.title, placemark.description)
+        } else {
+          toast(getString(R.string.add_error_message))
+        }
+      }
     }
     return super.onOptionsItemSelected(item)
   }
