@@ -7,11 +7,12 @@ import com.example.mitch.placemark.main.MainApp
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_placemark_maps.*
 import kotlinx.android.synthetic.main.content_placemark_maps.*
 
-class PlacemarkMapsActivity : AppCompatActivity() {
+class PlacemarkMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
   lateinit var map: GoogleMap
   lateinit var app: MainApp
 
@@ -26,6 +27,11 @@ class PlacemarkMapsActivity : AppCompatActivity() {
       map = it
       configureMap()
     }
+  }
+
+  override fun onMarkerClick(marker: Marker): Boolean {
+    currentTitle.text = marker.title
+    return false
   }
 
   override fun onDestroy() {
@@ -55,6 +61,7 @@ class PlacemarkMapsActivity : AppCompatActivity() {
 
   fun configureMap() {
     map.uiSettings.setZoomControlsEnabled(true)
+    map.setOnMarkerClickListener(this)
     app.placemarks.findAll().forEach {
       val loc = LatLng(it.location.lat, it.location.lng)
       val options = MarkerOptions().title(it.title).position(loc)
