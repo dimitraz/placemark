@@ -3,6 +3,7 @@ package com.example.mitch.placemark.activities
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.example.mitch.placemark.R
+import com.example.mitch.placemark.helpers.readImageFromPath
 import com.example.mitch.placemark.main.MainApp
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -30,8 +31,12 @@ class PlacemarkMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListen
   }
 
   override fun onMarkerClick(marker: Marker): Boolean {
-    currentTitle.text = marker.title
-    return false
+    val tag = marker.tag as Long
+    val placemark = app.placemarks.findById(tag)
+    currentTitle.text = placemark!!.title
+    currentDescription.text = placemark!!.description
+    imageView.setImageBitmap(readImageFromPath(this@PlacemarkMapsActivity, placemark.image))
+    return true
   }
 
   override fun onDestroy() {
