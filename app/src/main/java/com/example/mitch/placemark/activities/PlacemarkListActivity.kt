@@ -9,34 +9,31 @@ import android.view.MenuItem
 import com.example.mitch.placemark.R
 import com.example.mitch.placemark.adapters.PlacemarkAdapter
 import com.example.mitch.placemark.adapters.PlacemarkListener
-import com.example.mitch.placemark.main.MainApp
 import com.example.mitch.placemark.models.PlacemarkModel
 import kotlinx.android.synthetic.main.activity_placemark_list.*
-import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.startActivityForResult
 
 class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
-  override fun onPlacemarkClick(placemark: PlacemarkModel) {
-    startActivityForResult(intentFor<PlacemarkActivity>().putExtra("placemark_edit", placemark), 0)
-  }
-
-  lateinit var app: MainApp
+  lateinit var presenter: PlacemarkListPresenter
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_placemark_list)
     toolbarMain.title = title
     setSupportActionBar(toolbarMain)
-    app = application as MainApp
+
+    presenter = PlacemarkListPresenter(this)
 
     val layoutManager = LinearLayoutManager(this)
     recyclerView.layoutManager = layoutManager
     loadPlacemarks()
   }
 
+  override fun onPlacemarkClick(placemark: PlacemarkModel) {
+    presenter.doEditPlacemark(placemark)
+  }
+
   private fun loadPlacemarks() {
-    showPlacemarks(app.placemarks.findAll())
+    showPlacemarks(presenter.getPlacemarks())
   }
 
   fun showPlacemarks(placemarks: List<PlacemarkModel>) {
@@ -51,8 +48,8 @@ class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
 
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     when (item?.itemId) {
-      R.id.item_add -> startActivityForResult<PlacemarkActivity>(0)
-      R.id.item_map -> startActivity<PlacemarkMapsActivity>()
+      R.id.item_add -> presenter.doAddPlacemark()
+      R.id.item_map -> presenter.doShowPlacemarksMap()
     }
     return super.onOptionsItemSelected(item)
   }

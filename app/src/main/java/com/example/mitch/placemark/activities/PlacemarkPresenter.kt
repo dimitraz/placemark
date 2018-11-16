@@ -13,11 +13,10 @@ class PlacemarkPresenter(val activity: PlacemarkActivity) {
 
   var placemark = PlacemarkModel()
   var location = Location(52.245696, -7.139102, 15f)
-  var app: MainApp
+  var app: MainApp = activity.application as MainApp
   var edit = false;
 
   init {
-    app = activity.application as MainApp
     if (activity.intent.hasExtra("placemark_edit")) {
       edit = true
       placemark = activity.intent.extras.getParcelable<PlacemarkModel>("placemark_edit")
