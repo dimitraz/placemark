@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_placemark.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
 
-class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
+class PlacemarkView : AppCompatActivity(), AnkoLogger {
   lateinit var presenter: PlacemarkPresenter
   var placemark = PlacemarkModel()
 

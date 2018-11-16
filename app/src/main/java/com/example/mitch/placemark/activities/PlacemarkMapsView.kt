@@ -13,7 +13,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_placemark_maps.*
 import kotlinx.android.synthetic.main.content_placemark_maps.*
 
-class PlacemarkMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
+class PlacemarkMapsView : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
   lateinit var map: GoogleMap
   lateinit var app: MainApp
 
@@ -35,7 +35,7 @@ class PlacemarkMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListen
     val placemark = app.placemarks.findById(tag)
     currentTitle.text = placemark!!.title
     currentDescription.text = placemark!!.description
-    imageView.setImageBitmap(readImageFromPath(this@PlacemarkMapsActivity, placemark.image))
+    imageView.setImageBitmap(readImageFromPath(this@PlacemarkMapsView, placemark.image))
     return true
   }
 

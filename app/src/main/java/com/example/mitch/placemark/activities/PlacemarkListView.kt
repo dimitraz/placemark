@@ -12,7 +12,7 @@ import com.example.mitch.placemark.adapters.PlacemarkListener
 import com.example.mitch.placemark.models.PlacemarkModel
 import kotlinx.android.synthetic.main.activity_placemark_list.*
 
-class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
+class PlacemarkListView : AppCompatActivity(), PlacemarkListener {
   lateinit var presenter: PlacemarkListPresenter
 
   override fun onCreate(savedInstanceState: Bundle?) {

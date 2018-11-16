@@ -19,14 +19,14 @@
 
     <uses-library android:name="org.apache.http.legacy" android:required="false" />
 
-    <activity android:name=".activities.PlacemarkListActivity">
+    <activity android:name=".activities.PlacemarkListView">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <activity android:name=".activities.PlacemarkActivity" />
+    <activity android:name=".activities.PlacemarkView" />
     <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -40,11 +40,11 @@
       android:value="@string/google_maps_key" />
 
     <activity
-      android:name=".activities.MapsActivity"
+      android:name=".activities.EditLocationView"
       android:label="@string/title_activity_maps"></activity>
 
     <activity
-      android:name=".activities.PlacemarkMapsActivity"
+      android:name=".activities.PlacemarkMapsView"
       android:label="@string/title_activity_placemark_maps"
       android:theme="@style/AppTheme"></activity>
   </application>
