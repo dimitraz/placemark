@@ -1,6 +1,7 @@
-package com.example.mitch.placemark.activities
+package com.example.mitch.placemark.views.placemark
 
 import android.content.Intent
+import com.example.mitch.placemark.views.editLocation.EditLocationView
 import com.example.mitch.placemark.helpers.showImagePicker
 import com.example.mitch.placemark.main.MainApp
 import com.example.mitch.placemark.models.Location

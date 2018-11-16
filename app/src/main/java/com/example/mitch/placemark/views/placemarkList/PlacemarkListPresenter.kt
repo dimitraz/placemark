@@ -1,7 +1,9 @@
-package com.example.mitch.placemark.activities
+package com.example.mitch.placemark.views.placemarkList
 
+import com.example.mitch.placemark.activities.PlacemarkMapsView
 import com.example.mitch.placemark.main.MainApp
 import com.example.mitch.placemark.models.PlacemarkModel
+import com.example.mitch.placemark.views.placemark.PlacemarkView
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.startActivityForResult

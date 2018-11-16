@@ -1,4 +1,4 @@
-package com.example.mitch.placemark.activities
+package com.example.mitch.placemark.views.placemarkList
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,7 @@ import com.example.mitch.placemark.R
 import com.example.mitch.placemark.adapters.PlacemarkAdapter
 import com.example.mitch.placemark.adapters.PlacemarkListener
 import com.example.mitch.placemark.models.PlacemarkModel
+import com.example.mitch.placemark.views.placemarkList.PlacemarkListPresenter
 import kotlinx.android.synthetic.main.activity_placemark_list.*
 
 class PlacemarkListView : AppCompatActivity(), PlacemarkListener {

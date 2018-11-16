@@ -1,4 +1,4 @@
-package com.example.mitch.placemark.activities
+package com.example.mitch.placemark.views.editLocation
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
