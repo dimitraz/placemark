@@ -1,41 +1,39 @@
-package com.example.mitch.placemark.activities
+package com.example.mitch.placemark.views.placemarkMaps
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.example.mitch.placemark.R
 import com.example.mitch.placemark.helpers.readImageFromPath
-import com.example.mitch.placemark.main.MainApp
-import com.google.android.gms.maps.CameraUpdateFactory
+import com.example.mitch.placemark.models.PlacemarkModel
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_placemark_maps.*
 import kotlinx.android.synthetic.main.content_placemark_maps.*
 
 class PlacemarkMapsView : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
-  lateinit var map: GoogleMap
-  lateinit var app: MainApp
+  lateinit var presenter: PlacemarkMapsPresenter
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_placemark_maps)
     setSupportActionBar(toolbarMaps)
-    app = application as MainApp
+
+    presenter = PlacemarkMapsPresenter(this)
 
     mapView.onCreate(savedInstanceState)
     mapView.getMapAsync {
-      map = it
-      configureMap()
+      presenter.doPopulateMap(it)
     }
   }
 
+  fun showPlacemark(placemark: PlacemarkModel) {
+    currentTitle.text = placemark.title
+    currentDescription.text = placemark.description
+    imageView.setImageBitmap(readImageFromPath(this, placemark.image))
+  }
+
   override fun onMarkerClick(marker: Marker): Boolean {
-    val tag = marker.tag as Long
-    val placemark = app.placemarks.findById(tag)
-    currentTitle.text = placemark!!.title
-    currentDescription.text = placemark!!.description
-    imageView.setImageBitmap(readImageFromPath(this@PlacemarkMapsView, placemark.image))
+    presenter.doMarkerSelected(marker)
     return true
   }
 
@@ -62,17 +60,6 @@ class PlacemarkMapsView : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
   override fun onSaveInstanceState(outState: Bundle?) {
     super.onSaveInstanceState(outState)
     mapView.onSaveInstanceState(outState)
-  }
-
-  fun configureMap() {
-    map.uiSettings.setZoomControlsEnabled(true)
-    map.setOnMarkerClickListener(this)
-    app.placemarks.findAll().forEach {
-      val loc = LatLng(it.location.lat, it.location.lng)
-      val options = MarkerOptions().title(it.title).position(loc)
-      map.addMarker(options).tag = it.id
-      map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.location.zoom))
-    }
   }
 }
 

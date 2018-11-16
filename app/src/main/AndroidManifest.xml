@@ -44,7 +44,7 @@
       android:label="@string/title_activity_maps"></activity>
 
     <activity
-      android:name=".activities.PlacemarkMapsView"
+      android:name=".views.placemarkMaps.PlacemarkMapsView"
       android:label="@string/title_activity_placemark_maps"
       android:theme="@style/AppTheme"></activity>
   </application>

@@ -1,6 +1,6 @@
 package com.example.mitch.placemark.views.placemarkList
 
-import com.example.mitch.placemark.activities.PlacemarkMapsView
+import com.example.mitch.placemark.views.placemarkMaps.PlacemarkMapsView
 import com.example.mitch.placemark.main.MainApp
 import com.example.mitch.placemark.models.PlacemarkModel
 import com.example.mitch.placemark.views.placemark.PlacemarkView
