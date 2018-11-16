@@ -13,6 +13,7 @@ import com.example.mitch.placemark.main.MainApp
 import com.example.mitch.placemark.models.PlacemarkModel
 import kotlinx.android.synthetic.main.activity_placemark_list.*
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.startActivityForResult
 
 class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
@@ -51,6 +52,7 @@ class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     when (item?.itemId) {
       R.id.item_add -> startActivityForResult<PlacemarkActivity>(0)
+      R.id.item_map -> startActivity<PlacemarkMapsActivity>()
     }
     return super.onOptionsItemSelected(item)
   }
