@@ -1,137 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activities.PlacemarkActivity">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".activities.PlacemarkActivity">
 
   <RelativeLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      tools:layout_editor_absoluteX="135dp"
-      tools:layout_editor_absoluteY="0dp">
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:fitsSystemWindows="true"
-        app:elevation="0dip"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/colorAccent"
+      android:fitsSystemWindows="true"
+      app:elevation="0dip"
+      app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
       <android.support.v7.widget.Toolbar
-          android:id="@+id/toolbarAdd"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          app:titleTextColor="@color/colorPrimary" />
-    </android.support.design.widget.AppBarLayout>
-
-    <ScrollView
+        android:id="@+id/toolbarAdd"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/appBarLayout"
-        android:fillViewport="true">
-
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="vertical">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/placemarkTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="@string/hint_placemarkTitle"
-            android:inputType="text"
-            android:maxLength="25"
-            android:maxLines="1"
-            android:padding="8dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="14sp"/>
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="@string/hint_description"
-            android:inputType="text"
-            android:maxLength="25"
-            android:maxLines="1"
-            android:padding="8dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="14sp" />
-
-        <!--<Button-->
-          <!--android:id="@+id/chooseImage"-->
-          <!--android:layout_width="match_parent"-->
-          <!--android:layout_height="wrap_content"-->
-          <!--android:layout_margin="16dp"-->
-          <!--android:background="@color/colorAccent"-->
-          <!--android:paddingBottom="8dp"-->
-          <!--android:paddingTop="8dp"-->
-          <!--android:text="@string/button_addImage"-->
-          <!--android:textColor="@color/colorPrimary"-->
-          <!--android:textSize="16sp"/>-->
-
-        <!--<ImageView-->
-          <!--android:id="@+id/placemarkImage"-->
-          <!--android:layout_width="match_parent"-->
-          <!--android:layout_height="wrap_content"-->
-          <!--app:srcCompat="@mipmap/ic_launcher"/>-->
-
-        <Button
-          android:id="@+id/chooseImage"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_margin="16dp"
-          android:background="@color/colorAccent"
-          android:paddingBottom="8dp"
-          android:paddingTop="8dp"
-          android:stateListAnimator="@null"
-          android:text="Add Image"
-          android:textColor="@color/colorPrimary"
-          android:textSize="16sp" />
-
-        <ImageView
-          android:id="@+id/placemarkImage"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:cropToPadding="false"
-          app:srcCompat="@mipmap/ic_launcher" />
-
-        <Button
-          android:id="@+id/placemarkLocation"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_margin="16dp"
-          android:background="@color/colorAccent"
-          android:paddingBottom="8dp"
-          android:paddingTop="8dp"
-          android:stateListAnimator="@null"
-          android:text="@string/button_location"
-          android:textColor="@color/colorPrimary"
-          android:textSize="16sp"/>
-
-        <Button
-            android:id="@+id/btnAdd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:background="@color/colorAccent"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
-            android:stateListAnimator="@null"
-            android:text="@string/button_addPlacemark"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16sp"/>
-
-      </LinearLayout>
-    </ScrollView>
-
+        android:layout_height="wrap_content"
+        app:titleTextColor="@color/colorPrimary" />
+    </android.support.design.widget.AppBarLayout>
   </RelativeLayout>
+
+  <android.support.v4.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="16dp"
+    android:fillViewport="true"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+    <android.support.constraint.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginStart="16dp"
+      android:layout_marginLeft="16dp"
+      android:layout_marginTop="16dp"
+      android:layout_marginEnd="16dp"
+      android:layout_marginRight="16dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+      <android.support.design.widget.TextInputEditText
+        android:id="@+id/placemarkTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_placemarkTitle"
+        android:inputType="text"
+        android:maxLength="25"
+        android:maxLines="1"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+      <android.support.design.widget.TextInputEditText
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="@string/hint_description"
+        android:inputType="text"
+        android:maxLength="25"
+        android:maxLines="1"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/placemarkTitle" />
+
+      <Button
+        android:id="@+id/placemarkLocation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorAccent"
+        android:stateListAnimator="@null"
+        android:text="@string/button_location"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/placemarkImage" />
+
+      <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorAccent"
+        android:stateListAnimator="@null"
+        android:text="@string/button_addPlacemark"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/placemarkLocation" />
+
+      <Button
+        android:id="@+id/chooseImage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorAccent"
+        android:stateListAnimator="@null"
+        android:text="Add Image"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description" />
+
+      <ImageView
+        android:id="@+id/placemarkImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:cropToPadding="false"
+        app:layout_constraintTop_toBottomOf="@+id/chooseImage"
+        app:srcCompat="@mipmap/ic_launcher" />
+    </android.support.constraint.ConstraintLayout>
+  </android.support.v4.widget.NestedScrollView>
 
 </android.support.constraint.ConstraintLayout>
